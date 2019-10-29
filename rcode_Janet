@@ -1,0 +1,30 @@
+######1
+library(ggplot2)
+library(dplyr)
+library(actuar)
+alpha<-3
+beta<-100000
+n<-10000
+u<-runif(n)
+x<-beta*(1/((1-u)^(1/alpha))-1)
+options(scipen = 200)
+z=seq(0,499950,50)
+data.frame(value=x)%>%
+ggplot(.,aes(x=value))+geom_histogram(aes(y=..density..),binwidth = 5000)+
+  geom_line(aes(z,dpareto(z,alpha,beta)),color="darkblue")+
+  xlim(0,500000)+ggtitle("Simulation with alpha=3,beta=100000")
+######2
+AssetSim<-function(n,premium,prob){
+  asset<-0
+  for (k in 1:n) {
+    claim<-rbinom(1000,1,prob)
+    cost<-0
+    for (i in 1:1000) {
+      if(claim[i]==1){cost<-cost+rpareto(1,alpha,beta)}
+    }
+    asset[k]<-250000+1000*premium-cost
+  }
+  asset
+}
+mean(AssetSim(10000,6000,0.1))
+mean(AssetSim(10000,6000,0.1)<0)
