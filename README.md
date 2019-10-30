@@ -5,3 +5,4 @@
    week 6 :  think of other possible extensions and to exexute it;
    week 7 :  complete Q4;
    week 8 :  prepare the presentation
+4. some link:https://actuarialmodelingtopics.wordpress.com/2017/05/21/pareto-distribution/
