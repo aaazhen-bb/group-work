@@ -6,3 +6,4 @@
    week 7 :  complete Q4;
    week 8 :  prepare the presentation
 4. some link:https://actuarialmodelingtopics.wordpress.com/2017/05/21/pareto-distribution/
+5. document for ggplot2: https://tutorials.iq.harvard.edu/R/Rgraphics/Rgraphics.html
