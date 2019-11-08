@@ -1,30 +1,52 @@
 ######1
+rm(list=ls())
 library(ggplot2)
 library(dplyr)
 library(actuar)
+set.seed(123)
 alpha<-3
 beta<-100000
 n<-10000
 u<-runif(n)
 x<-beta*(1/((1-u)^(1/alpha))-1)
 options(scipen = 200)
-z=seq(0,499950,50)
+z=seq(0,299970,30)
 data.frame(value=x)%>%
 ggplot(.,aes(x=value))+geom_histogram(aes(y=..density..),binwidth = 5000)+
-  geom_line(aes(z,dpareto(z,alpha,beta)),color="darkblue")+
-  xlim(0,500000)+ggtitle("Simulation with alpha=3,beta=100000")
+  geom_line(aes(z,dpareto(z,alpha,beta)),color="darkred")+
+  xlim(0,300000)+ggtitle("Simulation with alpha=3,beta=100000")
 ######2
 AssetSim<-function(n,premium,prob){
-  asset<-0
+  balance<-0
   for (k in 1:n) {
     claim<-rbinom(1000,1,prob)
     cost<-0
     for (i in 1:1000) {
       if(claim[i]==1){cost<-cost+rpareto(1,alpha,beta)}
     }
-    asset[k]<-250000+1000*premium-cost
+    balance[k]<-250000+1000*premium-cost
   }
-  asset
+  balance
 }
-mean(AssetSim(10000,6000,0.1))
-mean(AssetSim(10000,6000,0.1)<0)
+output<-AssetSim(10000,6000,0.1)
+cat(paste("The expected asset: ",mean(output)))
+cat(paste("The probability of bankrupt: ",mean(output<0)))
+#######3
+premium<-seq(5500,8000,250)
+prob<-seq(0.05,0.15,0.005)
+dt1<-data.frame(premium=premium, balance=0,probability=0)
+dt2<-data.frame(claim=prob, balance=0,probability=0)
+for (i in 1:length(premium)){
+  output<-AssetSim(10000,premium[i],0.1)
+  dt1$balance[i]<-mean(output)
+  dt1$probability[i]<-mean(output<0)
+}
+ggplot(dt1,aes(premium,probability))+geom_point()+geom_line()
+cat("Minimal premium level:",min(dt1$premium[dt1$probability<0.02]))
+for (i in 1:length(prob)){
+  output<-AssetSim(10000,6000,prob[i])
+  dt2$balance[i]<-mean(output)
+  dt2$probability[i]<-mean(output<0)
+}
+ggplot(dt2,aes(claim,probability))+geom_point()+geom_line()
+cat("maximal probability of making a claim:",max(dt2$claim[dt2$probability<0.02]))
