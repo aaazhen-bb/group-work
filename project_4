@@ -8,9 +8,10 @@ ASSUMPTIONS
 6.	No deductibles are paid by any customers.
 7.	The company will retain all premiums charged with itself and not invest on anything else.
 
+
 FACTORS THAT THE COMPANY CAN CONTROL
-1.	For the risk of bankruptcy to be less than 2%, ensuring stability, the minimum premium that the company should charge is £7250 based on previous calculations. It is best if the company can stand firm with this pricing which indeed will improve the company’s reputation.
-2.	The maximum estimated probability of a customer making a claim is 0.08 for the risk of bankruptcy to be less than 2%. Forecast the probability of a customer making a claim before accepting customers and accept those who are at most 8% likely to make a claim.
+1.	(For p=0.1)For the risk of bankruptcy to be less than 2%, ensuring stability, the minimum premium that the company should charge is £7250 based on previous calculations. It is best if the company can stand firm with this pricing which indeed will improve the company’s reputation.
+2.	(for premium=6000) The maximum estimated probability of a customer making a claim is 0.08 for the risk of bankruptcy to be less than 2%. Forecast the probability of a customer making a claim before accepting customers and accept those who are at most 8% likely to make a claim.
 3.	Work together and maintain dialogues with customers throughout the year and not limit to the time of bankruptcy. Organize events, seminars and workshops aimed at networking with customers.
 4.	Do not wait till the net balance has reached zero to calculate the risk of bankruptcy. Always keep updated with the evaluations.
 5.	Conduct frequent seminars providing advice to minimize avoidable risks.
@@ -22,3 +23,7 @@ RESERVATIONS
 3.	Claims made by customers are generally not independent of each other.
 4.	In reality, one customer can make more than one claim per year.
 5.	There is a time constraint in the above analysis, which restricts the company to come to conclusions due to insufficient information.
+
+about our model, still based on the assumption 3,4,6,7
+plus a new one: The claim sizes are independent of the claim number process. The independence of the processes are not always true in real life,
+but it still gives us a good model to work with.
